@@ -12,7 +12,7 @@ export default class HelloCommand extends SlashCommand {
       name: "hello",
       description: "Says Hello!",
       // put the guilds you want this command to register in
-      guildIDs: ["754038600655568906"],
+      guildIDs: ["754038600655568906", "754038600655568906"],
       defaultPermission: true,
       type: ApplicationCommandType.CHAT_INPUT,
     });
