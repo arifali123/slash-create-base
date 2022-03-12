@@ -5,14 +5,14 @@ import {
   SlashCreator,
   MessageOptions,
 } from "slash-create";
-
+process.env.NODE_ENV !== "production" ? require("dotenv").config() : null;
 export default class HelloCommand extends SlashCommand {
   constructor(creator: SlashCreator) {
     super(creator, {
       name: "hello",
       description: "Says Hello!",
       // put the guilds you want this command to register in
-      guildIDs: ["754038600655568906", "754038600655568906"],
+      guildIDs: process.env.GUILD_IDS.split(","),
       defaultPermission: true,
       type: ApplicationCommandType.CHAT_INPUT,
     });

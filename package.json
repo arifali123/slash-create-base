@@ -1,14 +1,17 @@
 {
   "name": "slash-create-base",
   "version": "1.0.0",
-  "description": "",
+  "description": "Template repository for making slash command bots",
   "main": "src/index.ts",
   "scripts": {
     "dev": "ts-node-dev src/index.ts",
     "start": "ts-node src/index.ts"
   },
   "keywords": [],
-  "author": "",
+  "author": {
+    "name": "Arif Ali",
+    "email": "arifali640@gmail.com"
+  },
   "license": "MIT",
   "dependencies": {
     "@types/node": "^17.0.21",

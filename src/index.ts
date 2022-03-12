@@ -9,6 +9,7 @@ declare global {
       NODE_ENV: string;
       CLIENT_ID: string;
       PUBLIC_KEY: string;
+      GUILD_IDS: string;
     }
   }
 }
@@ -27,10 +28,9 @@ slash
   .syncCommands();
 
 slash.on("synced", () => console.log("Synced commands"));
-slash.on("debug", (msg) => console.log(msg));
+// slash.on("debug", (msg) => console.log(msg));
 client.on("ready", async (client) => {
   client.user?.setActivity({ name: "Your Commands", type: "WATCHING" });
-  //   console.log(join(__dirname, "commands"));
   console.log(
     `Logged in as ${client.user?.tag}\nhttps://discordapp.com/oauth2/authorize?client_id=${client.user?.id}&scope=bot&permissions=8`
   );
