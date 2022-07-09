@@ -32,7 +32,7 @@ slash.on("synced", () => console.log("Synced commands"));
 client.on("ready", async (client) => {
   client.user?.setActivity({ name: "Your Commands", type: "WATCHING" });
   console.log(
-    `Logged in as ${client.user?.tag}\nhttps://discordapp.com/oauth2/authorize?client_id=${client.user?.id}&scope=bot&permissions=8`
+    `Logged in as ${client.user?.tag}\nhttps://discordapp.com/oauth2/authorize?client_id=${client.user?.id}&scope=bot%20applications.commands&permissions=8`
   );
 });
 client.login(process.env.BOT_TOKEN);
