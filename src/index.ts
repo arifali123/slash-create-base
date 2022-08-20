@@ -1,4 +1,9 @@
-import { Client, Intents } from "discord.js";
+import {
+  ActivityType,
+  Client,
+  GatewayDispatchEvents,
+  GatewayIntentBits,
+} from "discord.js";
 import { join } from "path";
 import { GatewayServer, SlashCreator } from "slash-create";
 process.env.NODE_ENV !== "production" ? require("dotenv").config() : null;
@@ -13,7 +18,14 @@ declare global {
     }
   }
 }
-const client = new Client({ intents: new Intents(32767) });
+const client = new Client({
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.DirectMessages,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.MessageContent,
+  ],
+});
 const slash = new SlashCreator({
   publicKey: process.env.PUBLIC_KEY,
   applicationID: process.env.CLIENT_ID,
@@ -22,7 +34,9 @@ const slash = new SlashCreator({
 });
 slash
   .withServer(
-    new GatewayServer((handler) => client.ws.on("INTERACTION_CREATE", handler))
+    new GatewayServer((handler) =>
+      client.ws.on(GatewayDispatchEvents.InteractionCreate, handler)
+    )
   )
   .registerCommandsIn(join(__dirname, "commands"), [".ts"])
   .syncCommands();
@@ -30,7 +44,10 @@ slash
 slash.on("synced", () => console.log("Synced commands"));
 // slash.on("debug", (msg) => console.log(msg));
 client.on("ready", async (client) => {
-  client.user?.setActivity({ name: "Your Commands", type: "WATCHING" });
+  client.user?.setActivity({
+    name: "Your Commands",
+    type: ActivityType.Watching,
+  });
   console.log(
     `Logged in as ${client.user?.tag}\nhttps://discordapp.com/oauth2/authorize?client_id=${client.user?.id}&scope=bot%20applications.commands&permissions=8`
   );
